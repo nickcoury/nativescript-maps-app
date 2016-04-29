@@ -1,0 +1,29 @@
+{
+	"description": "Nativescript Maps App",
+	"license": "SEE LICENSE IN <your-license-filename>",
+	"readme": "NativeScript Application",
+	"repository": "nativescript-maps-app",
+	"nativescript": {
+		"id": "org.nativescript.nativescriptmapsapp",
+		"tns-android": {
+			"version": "2.0.0"
+		}
+	},
+	"dependencies": {
+		"angular2": "2.0.0-beta.16",
+		"nativescript-angular": "0.0.46",
+		"nativescript-google-maps-sdk": "^1.2.7",
+		"nativescript-sqlite": "^1.0.8",
+		"nativescript-telerik-ui": "^1.1.0",
+		"tns-core-modules": "^2.0.0 || 2.0.0-angular-6"
+	},
+	"devDependencies": {
+		"babel-traverse": "6.7.6",
+		"babel-types": "6.7.7",
+		"babylon": "6.7.0",
+		"filewalker": "0.1.2",
+		"lazy": "1.0.11",
+		"nativescript-dev-typescript": "^0.3.2",
+		"typescript": "^1.8.10"
+	}
+}
