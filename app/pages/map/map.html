@@ -18,9 +18,7 @@
     </template>
     <template drawerMain>
         <GridLayout>
-            <Label [text]="message"></Label>
-            <MapView [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [bearing]="bearing" [tilt]="tilt" (mapReady)="OnMapReady"
-                (markerSelect)="onMarkerSelect" (cameraChanged)="onCameraChanged" id="gMapView">
+            <MapView (mapReady)="onMapReady($event)">
             </MapView>
         </GridLayout>
    </template>

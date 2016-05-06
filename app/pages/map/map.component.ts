@@ -3,8 +3,9 @@ import {registerElement} from 'nativescript-angular/element-registry';
 var geolocation = require("nativescript-geolocation");
 var mapsModule = require("nativescript-google-maps-sdk");
 import {SIDEDRAWER_DIRECTIVES} from "nativescript-telerik-ui/sidedrawer";
+import {Color} from "color";
 
-registerElement("MapView", () => require("nativescript-google-maps-sdk").MapView);
+registerElement("MapView", () => mapsModule.MapView);
 
 @Component({
     selector: "map",
@@ -12,24 +13,13 @@ registerElement("MapView", () => require("nativescript-google-maps-sdk").MapView
     templateUrl: "pages/map/map.html",
 })
 export class MapComponent {
-    public message:string = "Let's Map!";
-    public latitude:number = 33.5;
-    public longitude:number = -111.9;
-    public zoom:number = 10;
-    public bearing:number = 0;
-    public tilt:number = 0;
-
+    mapView:any = null;
+    watchId:number = null;
+    polyline:any;
+    
     constructor() {
-        var _this = this;
-        this.enableLocation();
-        this.getLocation().then(function (location) {
-            console.log(JSON.stringify(location));
-            _this.latitude = location.latitude;
-            _this.longitude = location.longitude;
-            _this.message = "Lat: " + location.latitude + ", Lng: " + location.longitude;
-        });
     }
-
+    
     enableLocation() {
         if (!geolocation.isEnabled()) {
             console.log('Location not enabled, requesting.');
@@ -38,33 +28,65 @@ export class MapComponent {
     }
 
     getLocation() {
-        console.log('Getting location...');
-        return geolocation.getCurrentLocation({
-            desiredAccuracy: 3,
-            updateDistance: 10,
-            maximumAge: 30000,
-            timeout: 30000
-        })
+        if (geolocation.isEnabled()) {
+            return geolocation.getCurrentLocation({
+                desiredAccuracy: 10,
+                updateDistance: 10,
+                minimumUpdateTime: 1000,
+                maximumAge: 10000
+            })
+        }
     }
 
     //Map events
-    OnMapReady(args) {
-        var map = args.object;
+    onMapReady = (event) => {
+        console.log("Map Ready");
+        if (this.mapView || !event.object) return;
+        
+        this.mapView = event.object;
+        this.mapView.myLocationEnabled = true;
+        this.mapView.markerSelect = this.onMarkerSelect;
+        this.mapView.cameraChanged = this.onCameraChanged;
 
-        console.log("Setting a marker...");
+        this.enableLocation();
+        var location = this.getLocation().then(this.firstLocationReceived, this.error);
+    }
+    
+    error(err) {
+        console.log("Error: " + JSON.stringify(err));
+    }
+
+    onMarkerSelect(event) {
+        console.log("Clicked on " + event.marker.title);
+    }
+
+    onCameraChanged(event) {
+        console.log("Camera changed: " + JSON.stringify(event.camera));
+    }
+    
+    firstLocationReceived = (location) => {
+        this.mapView.latitude = location.latitude;
+        this.mapView.longitude = location.longitude;
+        this.mapView.zoom = 16;
+        
         var marker = new mapsModule.Marker();
-        marker.position = mapsModule.Position.positionFromLatLng(33.4484, -112.0740);
-        marker.title = "Phoenix";
-        marker.snippet = "Arizona";
-        marker.userData = {index: 1};
-        map.addMarker(marker);
+        marker.position = mapsModule.Position.positionFromLatLng(location.latitude, location.longitude);
+        marker.title = "My Location";
+        marker.snippet = "My Location";
+        this.mapView.addMarker(marker);
+        
+        this.polyline = new mapsModule.Polyline();
+        this.polyline.addPoint(mapsModule.Position.positionFromLatLng(location.latitude, location.longitude));
+        this.polyline.visible = true;
+        this.polyline.width = 10;
+        this.polyline.color = new Color('Red');
+        this.polyline.geodesic = true;
+        this.mapView.addPolyline(this.polyline);
+        
+        this.watchId = geolocation.watchLocation(this.locationReceived, this.error, {desiredAccuracy: 10, updateDistance: 10, minimumUpdateTime: 1000, maximumAge: 10000});
     }
-
-    onMarkerSelect(args) {
-        console.log("Clicked on " + args.marker.title);
-    }
-
-    onCameraChanged(args) {
-        console.log("Camera changed: " + JSON.stringify(args.camera));
+    
+    locationReceived = (location) => {
+        this.polyline.addPoint(mapsModule.Position.positionFromLatLng(location.latitude, location.longitude));
     }
 }
