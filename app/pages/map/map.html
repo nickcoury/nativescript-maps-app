@@ -1,25 +1,17 @@
-<RadSideDrawer #drawer style="background-color: white;">
-    <template drawerSide>
-        <StackLayout style="background-color: white;">
-            <StackLayout style=" padding:10;text-align: center;">
+<RadSideDrawer #drawer>
+    <template drawerSide style="background-color: blue;">
+        <StackLayout style="background-color: blue;">
+            <StackLayout style="background-color: blue; padding:10;text-align: center;">
                 <Label text="Navigation Menu"></Label>
             </StackLayout>
-            <StackLayout style="background-color: white;">
-                <Label text="Primary" style="padding: 10px;background-color:lightgray;"></Label>
-                <Label text="Social" style="padding: 10px;"></Label>
-                <Label text="Promotions" style="padding: 10px;"></Label>
-                <Label text="Labels" style="padding:10px;background-color: lightgray;"></Label>
-                <Label text="Important" style="padding: 10px;"></Label>
-                <Label text="Starred" style="padding: 10px;"></Label>
-                <Label text="Sent Mail" style="padding: 10px;"></Label>
-                <Label text="Drafts" style="padding: 10px;"></Label>
+            <StackLayout style="background-color: blue;">
+                <Button (tap)="clearLine()" text="Clear Line" style="padding: 10px;"></Button>
             </StackLayout>
        </StackLayout>
     </template>
     <template drawerMain>
         <GridLayout>
-            <MapView (mapReady)="onMapReady($event)">
-            </MapView>
+            <MapView (mapReady)="onMapReady($event)"></MapView>
         </GridLayout>
    </template>
 </RadSideDrawer>

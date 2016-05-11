@@ -1,0 +1,15 @@
+RadSideDrawer Label {
+    color: white;
+    padding: 10px;
+}
+
+RadSideDrawer Button {
+    background-color: none;
+    border-width: none;
+    color: white;
+    padding: 10px;
+}
+
+RadSideDrawer {
+    background-color: blue;
+}

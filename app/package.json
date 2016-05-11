@@ -35,7 +35,8 @@
   "dependencies": {
     "angular2": "2.0.0-beta.16",
     "nativescript-angular": "0.0.46",
-    "tns-core-modules": "^2.0.0 || 2.0.0-angular-6"
+    "tns-core-modules": "^2.0.0 || 2.0.0-angular-6",
+		"nativescript-google-maps-sdk": "file:C:/Users/nickc/Repos/nativescript-google-maps-sdk"
   },
   "devDependencies": {
     "nativescript-dev-typescript": "^0.3.2"

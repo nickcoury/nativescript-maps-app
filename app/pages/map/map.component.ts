@@ -36,6 +36,7 @@ export class MapComponent {
                 maximumAge: 10000
             })
         }
+        return Promise.reject("Geolocation not enabled.");
     }
 
     //Map events
@@ -44,7 +45,12 @@ export class MapComponent {
         if (this.mapView || !event.object) return;
         
         this.mapView = event.object;
-        this.mapView.myLocationEnabled = true;
+        this.mapView.myLocationEnabled(true);
+        this.mapView.myLocationButtonEnabled(true);
+        this.mapView.zoomControlsEnabled(true);
+        this.mapView.mapType(MapType.Terrain);
+
+        this.mapView.animateCameraChange = true;
         this.mapView.markerSelect = this.onMarkerSelect;
         this.mapView.cameraChanged = this.onCameraChanged;
 
@@ -89,4 +95,16 @@ export class MapComponent {
     locationReceived = (location) => {
         this.polyline.addPoint(mapsModule.Position.positionFromLatLng(location.latitude, location.longitude));
     }
+    
+    clearLine = () => {
+        this.polyline.removeAllPoints();
+    }
 }
+
+const enum MapType {
+    None,
+    Normal,
+    Satellite,
+    Terrain,
+    Hybrid
+} 
