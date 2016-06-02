@@ -1,15 +1,20 @@
-import {Component} from "angular2/core";
+import {Component, ViewChild} from "angular2/core";
 import {registerElement} from 'nativescript-angular/element-registry';
 var geolocation = require("nativescript-geolocation");
 var mapsModule = require("nativescript-google-maps-sdk");
-import {SIDEDRAWER_DIRECTIVES} from "nativescript-telerik-ui/sidedrawer";
+import {RadSideDrawer} from "nativescript-telerik-ui/sidedrawer";
+import sideDrawerModule = require('nativescript-telerik-ui/sidedrawer');
+import {RadSideDrawerComponent, SideDrawerType, MainTemplateDirective, DrawerTemplateDirective} from "nativescript-telerik-ui/sidedrawer/angular/side-drawer-directives";
+
+
 import {Color} from "color";
 
+console.log("Registering MapView");
 registerElement("MapView", () => mapsModule.MapView);
 
 @Component({
     selector: "map",
-    directives: [SIDEDRAWER_DIRECTIVES],
+    directives: [RadSideDrawerComponent, MainTemplateDirective, DrawerTemplateDirective],
     templateUrl: "pages/map/map.html",
 })
 export class MapComponent {
@@ -18,8 +23,20 @@ export class MapComponent {
     polyline:any;
     
     constructor() {
+
     }
     
+    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+    private drawer: SideDrawerType;
+    
+    ngAfterViewInit() {
+       this.drawer = this.drawerComponent.sideDrawer;
+    }
+    
+    public openDrawer(){
+        this.drawer.showDrawer();
+    }
+
     enableLocation() {
         if (!geolocation.isEnabled()) {
             console.log('Location not enabled, requesting.');
@@ -56,7 +73,7 @@ export class MapComponent {
 
         this.enableLocation();
         var location = this.getLocation().then(this.firstLocationReceived, this.error);
-    }
+    };
     
     error(err) {
         console.log("Error: " + JSON.stringify(err));
@@ -90,11 +107,11 @@ export class MapComponent {
         this.mapView.addPolyline(this.polyline);
         
         this.watchId = geolocation.watchLocation(this.locationReceived, this.error, {desiredAccuracy: 10, updateDistance: 10, minimumUpdateTime: 1000, maximumAge: 10000});
-    }
+    };
     
     locationReceived = (location) => {
         this.polyline.addPoint(mapsModule.Position.positionFromLatLng(location.latitude, location.longitude));
-    }
+    };
     
     clearLine = () => {
         this.polyline.removeAllPoints();

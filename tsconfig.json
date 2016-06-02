@@ -1,13 +1,24 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
         "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": false,
+        "watch": false,
+        "noLib": false,
         "sourceMap": true,
-        "experimentalDecorators": true,
+        "preserveConstEnums": true,
         "emitDecoratorMetadata": true,
-        "noEmitHelpers": true,
-        "noEmitOnError": true
+        "suppressImplicitAnyIndexErrors": true,
+        "noImplicitUseStrict": true,
+        "experimentalDecorators": true
     },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./tns_modules/**/*.ts",
+        "./../node_modules/tns-core-modules/**/*.ts"
+    ],
     "exclude": [
         "node_modules",
         "platforms"
