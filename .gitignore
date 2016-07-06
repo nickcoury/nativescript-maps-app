@@ -19,13 +19,13 @@ tests/platforms
 tests/lib
 tests/node_modules
 
+app/**/*.js
+app/**/*.js.map
+app/App_Resources/Android/values/nativescript_google_maps_api.xml
+
 ng-sample/app/**/*.js
 ng-sample/app/nativescript-angular
 ng-sample/app/global.d.ts
 ng-sample/platforms
 ng-sample/lib
 ng-sample/node_modules
-
-startup-test/platforms
-startup-test/lib
-startup-test/node_modules

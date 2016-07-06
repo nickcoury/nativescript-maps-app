@@ -1,10 +1,10 @@
-import {Component, ViewChild} from "angular2/core";
+import {Component, ViewChild} from "@angular/core";
 import {registerElement} from 'nativescript-angular/element-registry';
 var geolocation = require("nativescript-geolocation");
 var mapsModule = require("nativescript-google-maps-sdk");
 import {RadSideDrawer} from "nativescript-telerik-ui/sidedrawer";
 import sideDrawerModule = require('nativescript-telerik-ui/sidedrawer');
-import {RadSideDrawerComponent, SideDrawerType, MainTemplateDirective, DrawerTemplateDirective} from "nativescript-telerik-ui/sidedrawer/angular/side-drawer-directives";
+import {RadSideDrawerComponent, SideDrawerType, MainTemplateDirective, DrawerTemplateDirective} from "nativescript-telerik-ui/sidedrawer/angular";
 
 
 import {Color} from "color";

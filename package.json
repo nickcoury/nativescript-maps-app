@@ -4,7 +4,10 @@
   "readme": "Nativescript Maps App",
   "repository": "nativescript-maps-app",
   "nativescript": {
-    "id": "org.nativescript.nativescriptmapsapp"
+    "id": "org.nativescript.nativescriptmapsapp",
+    "tns-android": {
+      "version": "2.1.1"
+    }
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.3",
@@ -23,6 +26,10 @@
     "tns-core-modules": "^2.1.0"
   },
   "devDependencies": {
+    "babel-traverse": "6.10.4",
+    "babel-types": "6.11.1",
+    "babylon": "6.8.3",
+    "lazy": "1.0.11",
     "nativescript-dev-typescript": "^0.3.2",
     "typescript": "^1.8.10"
   }
