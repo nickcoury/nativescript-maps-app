@@ -1,29 +1,27 @@
 {
-  "nativescript": {
-    "id": "org.nativescript.nativescriptmapsapp"
-  },
-  "name": "nativescript-maps-app",
-  "main": "main.js",
-  "version": "0.0.1",
-  "author": {
-    "name": "Nick Coury",
-    "email": "nickcoury@gmail.com"
-  },
-  "description": "Nativescript Angular Google Maps App",
-  "license": "BSD",
-  "keywords": [
-    "telerik",
-    "mobile",
-    "angular",
-    "nativescript",
-    "{N}",
-    "tns",
-    "appbuilder",
-    "template",
-    "google",
-    "maps",
-    "typescript"
-  ],
+    "private": false,
+    "nativescript": {
+        "id": "org.nativescript.nativescriptmapsapp"
+    },
+    "name": "nativescript-maps-app",
+    "main": "main.js",
+    "version": "0.0.2",
+    "author": "Nick Coury <nickcoury@gmail.com>",
+    "description": "Nativescript Angular Google Maps App",
+    "license": "BSD",
+    "keywords": [
+        "telerik",
+        "mobile",
+        "angular",
+        "nativescript",
+        "{N}",
+        "tns",
+        "appbuilder",
+        "template",
+        "google",
+        "maps",
+        "typescript"
+    ],
   "repository": {
     "type": "git",
     "url": "git://github.com/nickcoury/nativescript-maps-app.git"
@@ -32,22 +30,20 @@
   "android": {
     "v8Flags": "--expose_gc"
   },
-  "dependencies": {
-    "angular2": "2.0.0-beta.16",
-    "nativescript-angular": "0.0.46",
-    "tns-core-modules": "^2.0.0 || 2.0.0-angular-6",
-		"nativescript-google-maps-sdk": "file:C:/Users/nickc/Repos/nativescript-google-maps-sdk"
-  },
-  "devDependencies": {
-    "nativescript-dev-typescript": "^0.3.2"
-  },
-  "gitHead": "05fab944443fe35894cde36e5b877df183f09b51",
-  "bugs": {
-    "url": "https://github.com/nickcoury/nativescript-maps-app/issues"
-  },
-  "readme": "ERROR: No README data found!",
-  "_id": "nativescript-maps-app@0.0.1",
-  "_shasum": "1ab3fae96f4a608c43df73414286683208ff6e94",
-  "_from": "git+https://github.com/nickcoury/nativescript-maps-app.git",
-  "_resolved": "git+https://github.com/nickcoury/nativescript-maps-app.git#05fab944443fe35894cde36e5b877df183f09b51"
+    "dependencies": {
+        "@angular/common": "2.0.0-rc.3",
+        "@angular/compiler": "2.0.0-rc.3",
+        "@angular/core": "2.0.0-rc.3",
+        "@angular/http": "2.0.0-rc.3",
+        "@angular/platform-browser": "2.0.0-rc.3",
+        "@angular/platform-browser-dynamic": "2.0.0-rc.3",
+        "@angular/platform-server": "2.0.0-rc.3",
+        "@angular/router": "3.0.0-alpha.7",
+        "@angular/router-deprecated": "2.0.0-rc.2",
+        "nativescript-angular": "0.2.0",
+        "tns-core-modules": "^2.1.0"
+    },
+    "devDependencies": {
+        "nativescript-dev-typescript": "^0.3.2"
+    }
 }
