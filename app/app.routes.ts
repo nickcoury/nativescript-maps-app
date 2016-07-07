@@ -3,7 +3,8 @@ import {nsProvideRouter} from "nativescript-angular/router"
 import {MapComponent} from "./pages/map/map.component";
 
 export const routes: RouterConfig = [
-  { path: "map", component: MapComponent }
+{ path: "", component: MapComponent },
+ { path: "map", component: MapComponent },
 ];
 
 export const APP_ROUTER_PROVIDERS = [

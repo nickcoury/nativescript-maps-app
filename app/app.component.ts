@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
 import {RouterConfig} from "@angular/router";
 import {NS_ROUTER_DIRECTIVES} from "nativescript-angular/router";
-import {MapComponent} from "./pages/map/map.component";
 var application = require("application");
 
 if(application.ios) {
@@ -12,7 +11,7 @@ if(application.ios) {
 @Component({
     selector: "app-main",
     directives: [NS_ROUTER_DIRECTIVES],
-    template: "<page-router-outlet ></page-router-outlet>",
+    template: "<page-router-outlet></page-router-outlet>",
 })
 export class AppComponent {
 }
