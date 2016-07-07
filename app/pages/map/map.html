@@ -1,17 +1,27 @@
 <RadSideDrawer #drawer drawerLocation="Left">
-    <template drawerSide style="background-color: blue;">
-        <StackLayout style="background-color: blue;">
-            <StackLayout style="background-color: blue; padding:10;text-align: center;">
-                <Label text="Navigation Menu"></Label>
-            </StackLayout>
-            <StackLayout style="background-color: blue;">
-                <Button (tap)="clearLine()" text="Clear Line" style="padding: 10px;"></Button>
-            </StackLayout>
-       </StackLayout>
+    <template drawerSide>
+      <GridLayout rows="*, auto">
+        <StackLayout row="0">
+          <Image src="res://icon" cssClass="header-image" stretch="aspectFit" ></Image>
+          <Label cssClass="divider"></Label>
+          <Label (tap)="closeDrawer()" text="Map View" cssClass="button" ></Label>
+          <Label cssClass="button-divider"></Label>
+          <Label (tap)="clearGpsLine()" text="Clear Gps Line" cssClass="button" ></Label>
+          <Label cssClass="button-divider"></Label>
+          <Label (tap)="clearTapLine()" text="Clear Drawn Line" cssClass="button" ></Label>
+          <Label cssClass="button-divider"></Label>
+        </StackLayout>
+        <StackLayout row="1">
+          <Label text="Created with Nativescript" tap="goToUrl" tag="http://www.nativescript.org" ></Label>
+        </StackLayout>
+      </GridLayout>
     </template>
     <template drawerMain>
-        <GridLayout>
-            <MapView (mapReady)="onMapReady($event)"></MapView>
-        </GridLayout>
+        <AbsoluteLayout cssClass="menu-button" width="100%" height="100%">
+            <GridLayout top="0" left="0" width="100%" height="100%">
+                <MapView (mapReady)="onMapReady($event)" (coordinateTapped)="mapTapped($event)"></MapView>
+            </GridLayout>
+            <Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="menu-button" stretch="none" ></Image>
+        </AbsoluteLayout>
    </template>
 </RadSideDrawer>
