@@ -1,15 +1,41 @@
 RadSideDrawer Label {
     color: white;
+    font-size: 16px;
     padding: 10px;
+    text-align: center;
 }
 
-RadSideDrawer Button {
+RadSideDrawer Label.divider {
+    background-color: white;
+    width: 90%;
+    height: 1px;
+}
+
+RadSideDrawer Label.button-divider {
+    background-color: #004488;
+    width: 75%;
+    height: 1px;
+}
+
+RadSideDrawer Label.button {
     background-color: none;
-    border-width: none;
     color: white;
+    font-size: 24;
+    text-align: center;
     padding: 10px;
 }
 
-RadSideDrawer {
-    background-color: blue;
+RadSideDrawer StackLayout {
+    background-color: #0088ff;
+}
+
+RadSideDrawer Image.header-image {
+    height: 120px;
+    width: auto;
+    margin: 20px;
+}
+
+AbsoluteLayout Image.menu-button {
+    width: auto;
+    height: auto;
 }

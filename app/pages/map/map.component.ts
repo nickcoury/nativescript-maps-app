@@ -16,12 +16,15 @@ registerElement("MapView", () => mapsModule.MapView);
     selector: "map",
     directives: [RadSideDrawerComponent, MainTemplateDirective, DrawerTemplateDirective],
     templateUrl: "pages/map/map.html",
+  styleUrls: ["pages/map/map.css"],
 })
 export class MapComponent {
     mapView:any = null;
     watchId:number = null;
-    polyline:any;
-    
+    gpsLine:any;
+    tapLine:any;
+    tapMarker:any;
+
     constructor() {
 
     }
@@ -35,6 +38,10 @@ export class MapComponent {
     
     public openDrawer(){
         this.drawer.showDrawer();
+    }
+    
+    public closeDrawer(){
+        this.drawer.closeDrawer();
     }
 
     enableLocation() {
@@ -74,6 +81,29 @@ export class MapComponent {
         this.enableLocation();
         var location = this.getLocation().then(this.firstLocationReceived, this.error);
     };
+
+    mapTapped = (event) => {
+        console.log("Map Tapped");
+
+        if (this.tapLine == null) {
+            this.tapMarker = new mapsModule.Marker();
+            this.tapMarker.position = mapsModule.Position.positionFromLatLng(event.position.latitude, event.position.longitude);
+            this.tapMarker.title = "Tap Marker";
+            this.tapMarker.snippet = "Tap Marker";
+            this.mapView.addMarker(this.tapMarker);        
+
+            this.tapLine = new mapsModule.Polyline();
+            this.tapLine.addPoint(mapsModule.Position.positionFromLatLng(event.position.latitude, event.position.longitude));
+            this.tapLine.visible = true;
+            this.tapLine.width = 10;
+            this.tapLine.color = new Color('Red');
+            this.tapLine.geodesic = true;
+            this.mapView.addPolyline(this.tapLine);
+        }
+        else {
+            this.tapLine.addPoint(mapsModule.Position.positionFromLatLng(event.position.latitude, event.position.longitude));
+        }
+    };
     
     error(err) {
         console.log("Error: " + JSON.stringify(err));
@@ -98,23 +128,36 @@ export class MapComponent {
         marker.snippet = "My Location";
         this.mapView.addMarker(marker);
         
-        this.polyline = new mapsModule.Polyline();
-        this.polyline.addPoint(mapsModule.Position.positionFromLatLng(location.latitude, location.longitude));
-        this.polyline.visible = true;
-        this.polyline.width = 10;
-        this.polyline.color = new Color('Red');
-        this.polyline.geodesic = true;
-        this.mapView.addPolyline(this.polyline);
+        this.gpsLine = new mapsModule.Polyline();
+        this.gpsLine.addPoint(mapsModule.Position.positionFromLatLng(location.latitude, location.longitude));
+        this.gpsLine.visible = true;
+        this.gpsLine.width = 10;
+        this.gpsLine.color = new Color('Green');
+        this.gpsLine.geodesic = true;
+        this.mapView.addPolyline(this.gpsLine);
         
         this.watchId = geolocation.watchLocation(this.locationReceived, this.error, {desiredAccuracy: 10, updateDistance: 10, minimumUpdateTime: 1000, maximumAge: 10000});
     };
     
     locationReceived = (location) => {
-        this.polyline.addPoint(mapsModule.Position.positionFromLatLng(location.latitude, location.longitude));
+        this.gpsLine.addPoint(mapsModule.Position.positionFromLatLng(location.latitude, location.longitude));
     };
     
-    clearLine = () => {
-        this.polyline.removeAllPoints();
+    clearGpsLine = () => {
+        this.gpsLine.removeAllPoints();
+        this.closeDrawer();
+    }
+    
+    clearTapLine = () => {
+        if (this.tapLine != null) {
+            this.tapLine.removeAllPoints();
+            this.tapLine = null;
+        }
+        if (this.tapMarker != null) {
+            this.mapView.removeMarker(this.tapMarker);
+            this.tapMarker = null;
+        }
+        this.closeDrawer();
     }
 }
 
