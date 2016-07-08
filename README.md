@@ -3,6 +3,9 @@ Simple Nativescript + Angular 2 + Typescript App
 
 This project demonstrates how to use Nativescript with Angular 2 and Typescript, along with the Google Maps API natively.
 
+![](screenshot1.png)
+![](screenshot2.png)
+
 ## Quick Start
 Pull down the project.
 
