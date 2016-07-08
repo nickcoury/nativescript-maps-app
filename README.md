@@ -11,15 +11,10 @@ Register for a Google Maps API key in the [Google Developers Console](https://co
 For Android, add the key to `app/App_Resources/Android/values/nativescript_google_maps_api.xml`.
 For IOS, add the key to `app/app.component.ts`.
 
-Run from the terminal in the project folder
-```
-npm install
-```
-
-Then run the appropriate command for your platform
+Run the appropriate command(s) from the terminal in the project folder
 ```
 tns platform add ios
-tns run android
+tns run ios
 ```
 ```
 tns run android
