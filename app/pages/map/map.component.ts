@@ -4,7 +4,7 @@ var geolocation = require("nativescript-geolocation");
 var mapsModule = require("nativescript-google-maps-sdk");
 import {RadSideDrawer} from "nativescript-telerik-ui/sidedrawer";
 import sideDrawerModule = require('nativescript-telerik-ui/sidedrawer');
-import {RadSideDrawerComponent, SideDrawerType, MainTemplateDirective, DrawerTemplateDirective} from "nativescript-telerik-ui/sidedrawer/angular";
+import {RadSideDrawerComponent, SideDrawerType} from "nativescript-telerik-ui/sidedrawer/angular";
 
 
 import {Color} from "color";
@@ -12,11 +12,12 @@ import {Color} from "color";
 console.log("Registering MapView");
 registerElement("MapView", () => mapsModule.MapView);
 
+
 @Component({
+    moduleId: module.id,
     selector: "map",
-    directives: [RadSideDrawerComponent, MainTemplateDirective, DrawerTemplateDirective],
-    templateUrl: "pages/map/map.html",
-  styleUrls: ["pages/map/map.css"],
+    templateUrl: "map.html",
+    styleUrls: ["map.css"],
 })
 export class MapComponent {
     mapView:any = null;
@@ -69,12 +70,7 @@ export class MapComponent {
         if (this.mapView || !event.object) return;
 
         this.mapView = event.object;
-        // this.mapView.myLocationEnabled(true);
-        // this.mapView.myLocationButtonEnabled(true);
-        // this.mapView.zoomControlsEnabled(true);
-        // this.mapView.mapType(MapType.Terrain);
-
-        // this.mapView.animateCameraChange = true;
+        
         this.mapView.markerSelect = this.onMarkerSelect;
         this.mapView.cameraChanged = this.onCameraChanged;
 

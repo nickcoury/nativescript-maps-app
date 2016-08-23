@@ -1,5 +1,5 @@
 <RadSideDrawer #drawer drawerLocation="Left">
-    <template drawerSide>
+    <StackLayout tkDrawerContent>
       <GridLayout rows="*, auto">
         <StackLayout row="0">
           <Image src="res://icon" cssClass="header-image" stretch="aspectFit" ></Image>
@@ -15,13 +15,13 @@
           <Label text="Created with Nativescript" tap="goToUrl" tag="http://www.nativescript.org" ></Label>
         </StackLayout>
       </GridLayout>
-    </template>
-    <template drawerMain>
+    </StackLayout>
+    <StackLayout tkMainContent>
         <AbsoluteLayout cssClass="menu-button" width="100%" height="100%">
             <GridLayout top="0" left="0" width="100%" height="100%">
                 <MapView (mapReady)="onMapReady($event)" (coordinateTapped)="mapTapped($event)"></MapView>
             </GridLayout>
             <Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="menu-button" stretch="none" ></Image>
         </AbsoluteLayout>
-   </template>
+    </StackLayout>
 </RadSideDrawer>
