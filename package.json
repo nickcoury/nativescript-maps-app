@@ -4,10 +4,7 @@
   "readme": "README.md",
   "repository": "nativescript-maps-app",
   "nativescript": {
-    "id": "org.nativescript.nativescriptmapsapp",
-    "tns-android": {
-      "version": "2.2.0"
-    }
+    "id": "org.nativescript.nativescriptmapsapp"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
