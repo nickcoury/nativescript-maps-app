@@ -1,17 +1,14 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component, ViewChild, AfterViewInit} from "@angular/core";
 import {registerElement} from 'nativescript-angular/element-registry';
-var geolocation = require("nativescript-geolocation");
-var mapsModule = require("nativescript-google-maps-sdk");
-import {RadSideDrawer} from "nativescript-telerik-ui/sidedrawer";
+let geolocation = require("nativescript-geolocation");
+let mapsModule = require("nativescript-google-maps-sdk");
 import sideDrawerModule = require('nativescript-telerik-ui/sidedrawer');
 import {RadSideDrawerComponent, SideDrawerType} from "nativescript-telerik-ui/sidedrawer/angular";
-
 
 import {Color} from "color";
 
 console.log("Registering MapView");
 registerElement("MapView", () => mapsModule.MapView);
-
 
 @Component({
     moduleId: module.id,
@@ -19,7 +16,7 @@ registerElement("MapView", () => mapsModule.MapView);
     templateUrl: "map.html",
     styleUrls: ["map.css"],
 })
-export class MapComponent {
+export class MapComponent implements AfterViewInit {
     mapView:any = null;
     watchId:number = null;
     gpsLine:any;
@@ -29,7 +26,7 @@ export class MapComponent {
     constructor() {
 
     }
-    
+
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
     private drawer: SideDrawerType;
     
@@ -65,20 +62,20 @@ export class MapComponent {
     }
 
     //Map events
-    onMapReady = (event) => {
+    onMapReady = function(event) {
         console.log("Map Ready");
         if (this.mapView || !event.object) return;
 
         this.mapView = event.object;
-        
+
         this.mapView.markerSelect = this.onMarkerSelect;
         this.mapView.cameraChanged = this.onCameraChanged;
 
         this.enableLocation();
-        var location = this.getLocation().then(this.firstLocationReceived, this.error);
+        let location = this.getLocation().then(this.firstLocationReceived, this.error);
     };
 
-    mapTapped = (event) => {
+    mapTapped = function(event) {
         console.log("Map Tapped");
 
         if (this.tapLine == null) {
@@ -100,7 +97,7 @@ export class MapComponent {
             this.tapLine.addPoint(mapsModule.Position.positionFromLatLng(event.position.latitude, event.position.longitude));
         }
     };
-    
+
     error(err) {
         console.log("Error: " + JSON.stringify(err));
     }
@@ -113,12 +110,12 @@ export class MapComponent {
         console.log("Camera changed: " + JSON.stringify(event.camera));
     }
     
-    firstLocationReceived = (location) => {
+    firstLocationReceived = function(location) {
         this.mapView.latitude = location.latitude;
         this.mapView.longitude = location.longitude;
         this.mapView.zoom = 16;
         
-        var marker = new mapsModule.Marker();
+        let marker = new mapsModule.Marker();
         marker.position = mapsModule.Position.positionFromLatLng(location.latitude, location.longitude);
         marker.title = "My Location";
         marker.snippet = "My Location";
@@ -135,32 +132,26 @@ export class MapComponent {
         this.watchId = geolocation.watchLocation(this.locationReceived, this.error, {desiredAccuracy: 10, updateDistance: 10, minimumUpdateTime: 1000, maximumAge: 10000});
     };
     
-    locationReceived = (location) => {
+    locationReceived = function(location) {
         this.gpsLine.addPoint(mapsModule.Position.positionFromLatLng(location.latitude, location.longitude));
     };
     
-    clearGpsLine = () => {
-        this.gpsLine.removeAllPoints();
+    clearGpsLine = function() {
+        if (this.gpsLine) {
+            this.gpsLine.removeAllPoints();
+        }
         this.closeDrawer();
-    }
+    };
     
-    clearTapLine = () => {
-        if (this.tapLine != null) {
+    clearTapLine = function() {
+        if (this.tapLine) {
             this.tapLine.removeAllPoints();
             this.tapLine = null;
         }
-        if (this.tapMarker != null) {
+        if (this.tapMarker) {
             this.mapView.removeMarker(this.tapMarker);
             this.tapMarker = null;
         }
         this.closeDrawer();
     }
 }
-
-const enum MapType {
-    None,
-    Normal,
-    Satellite,
-    Terrain,
-    Hybrid
-} 

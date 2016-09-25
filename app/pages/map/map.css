@@ -36,6 +36,6 @@ RadSideDrawer Image.header-image {
 }
 
 AbsoluteLayout Image.menu-button {
-    width: auto;
-    height: auto;
+    width: 48px;
+    height: 48px;
 }

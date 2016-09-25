@@ -11,6 +11,8 @@ src/nativescript-angular/**/*.js
 .nvm
 .vscode
 .DS_Store
+.idea/
+lib/
 nativescript-angular*.tgz
 
 tests/app/**/*.js
