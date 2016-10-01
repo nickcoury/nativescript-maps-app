@@ -29,4 +29,14 @@ tns run android
 4. Includes Telerik-UI side drawer.
 5. Nativescript + Angular2 + Typescript
 
-Special thanks to  [dapriett](https://github.com/dapriett) and  [Telerik](http://nativescript.org/)
+## Important Note
+
+The Google Maps SDK has an issue currently (pull request pending to fix) that will break the Typescript compilation.  To fix it, do the following:
+
+In the `node_modules/nativescript-google-maps-sdk` folder, change:
+
+`map-view.d.ts` - Remove `;` on lines 125 and 136.
+`package.json` - Add `"typings": "map-view.d.ts"` at line 6.
+
+
+Special thanks to [dapriett](https://github.com/dapriett) and [Telerik](http://nativescript.org/)
