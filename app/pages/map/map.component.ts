@@ -4,6 +4,7 @@ let geolocation = require('nativescript-geolocation');
 import {MapView, Marker, Polyline, Position} from 'nativescript-google-maps-sdk';
 import sideDrawerModule = require('nativescript-telerik-ui/sidedrawer');
 import {RadSideDrawerComponent, SideDrawerType} from 'nativescript-telerik-ui/sidedrawer/angular';
+var style = require('./map-style.json');
 
 import {Color} from 'color';
 
@@ -70,6 +71,8 @@ export class MapComponent implements AfterViewInit {
         if (this.mapView || !event.object) return;
 
         this.mapView = event.object;
+
+        this.mapView.setStyle(style);
 
         this.mapView.markerSelect = this.onMarkerSelect;
         this.mapView.cameraChanged = this.onCameraChanged;
