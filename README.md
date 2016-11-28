@@ -28,15 +28,12 @@ tns run android
 3. Draw a route by touching points on the map.
 4. Includes Telerik-UI side drawer.
 5. Nativescript + Angular2 + Typescript
+6. Uses Google Maps styling.
 
-## Important Note
+## Styling
 
-The Google Maps SDK has an issue currently (pull request pending to fix) that will break the Typescript compilation.  To fix it, do the following:
+Change map style in `app/pages/map/map-style.json`.
 
-In the `node_modules/nativescript-google-maps-sdk` folder, change:
-
-`map-view.d.ts` - Remove `;` on lines 125 and 136.
-`package.json` - Add `"typings": "map-view.d.ts"` at line 6.
-
+For map styles, see [Google Maps Style Reference](https://developers.google.com/maps/documentation/android-api/style-reference) and the [Styling Wizard](https://mapstyle.withgoogle.com/).
 
 Special thanks to [dapriett](https://github.com/dapriett) and [Telerik](http://nativescript.org/)
