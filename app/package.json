@@ -5,7 +5,7 @@
     },
     "name": "nativescript-maps-app",
     "main": "main.js",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "author": "Nick Coury <nickcoury@gmail.com>",
     "description": "Nativescript Angular Google Maps App",
     "license": "MIT",
